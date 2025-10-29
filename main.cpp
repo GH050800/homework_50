@@ -9,10 +9,10 @@ private:
     int** matrix;
 
 public:
-    Matrix(int r, int c)
+    Matrix(int rows, int cols)
     {
-        rows = r;
-        cols = c;
+        this->rows = rows;
+        this->cols = cols;
 		matrix = new int* [rows];
 
         for (int i = 0; i < rows; i++)
@@ -23,8 +23,8 @@ public:
 
     Matrix(const Matrix& other)
     {
-        rows = other.rows;
-        cols = other.cols;
+        this->rows = other.rows;
+        this->cols = other.cols;
 		matrix = new int* [rows];
 
         for (int i = 0; i < rows; i++)
@@ -43,13 +43,13 @@ public:
         {
             for (int i = 0; i < rows; i++)
             {
-                delete matrix[i];
+                delete[] matrix[i];
             }
 			delete[] matrix;
 
-            rows = other.rows;
-			cols = other.cols;
-            matrix = new int* [rows];
+            this->rows = other.rows;
+			this->cols = other.cols;
+            this->matrix = new int* [rows];
 
             for (int i = 0; i < rows; i++)
             {
@@ -117,9 +117,9 @@ public:
 
         for (int i = 0; i < rows; i++)
         {
-            delete mat->matrix[i];
+            delete[] mat->matrix[i];
         }
-		delete mat->matrix;
+		delete[] mat->matrix;
 
 		mat->matrix = rotated;
 		mat->cols = rows;
