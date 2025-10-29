@@ -41,6 +41,12 @@ public:
     {
         if (this != &other)
         {
+            for (int i = 0; i < rows; i++)
+            {
+                delete matrix[i];
+            }
+			delete[] matrix;
+
             rows = other.rows;
 			cols = other.cols;
             matrix = new int* [rows];
@@ -100,7 +106,7 @@ public:
         {
             rotated[i] = new int[rows];
         }
-        
+
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
@@ -108,6 +114,12 @@ public:
                 rotated[j][rows - i - 1] = mat->matrix[i][j];
             }
         }
+
+        for (int i = 0; i < rows; i++)
+        {
+            delete mat->matrix[i];
+        }
+		delete mat->matrix;
 
 		mat->matrix = rotated;
 		mat->cols = rows;
